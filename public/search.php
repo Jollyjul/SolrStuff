@@ -32,7 +32,8 @@ if ($query)
   try
   {
     $params = array('hl' => 'on', 
-                    'hl.fl' =>'text',
+                    'hl.fl' =>'*',
+                    'hl.snippets' => '20',
                     'version' =>'2.2',
                     'sort' =>'volume asc, page asc'); //sort by volume and page
     $results = $solr->search($query, 0, $limit,$params);
@@ -117,6 +118,7 @@ if ($results)
   $p = $doc->id;
 ?>
       <li>
+      	<a href="./Vol<?=$doc->volume ?>/large/SOTW_Vol<?=$doc->volume ?>_<?=$doc->page ?>.gif">Link to a .gif of volume <?=$doc->volume ?>, page <?=$doc->page ?></a>
         <table style="border: 1px solid black; text-align: left">
          <tr>
             <td></td>
@@ -135,6 +137,7 @@ if ($results)
     }
 ?>
         </table>
+        <br>
       </li>
 <?php
   }
