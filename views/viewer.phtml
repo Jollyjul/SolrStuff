@@ -98,6 +98,9 @@ var sotw_config = {};
 // use the name of the main window to get the parameter
 current_volume = top.window.name;
 
+
+
+
 // page counts for all volumes:
 var volumes = { "Vol01" : 384,
 				"Vol02" : 328,
@@ -148,10 +151,47 @@ function reload_sotw_config() {
 // load sotw_config for the first time
 reload_sotw_config();
 //load the document viewer with the proper sotw_config
- window.currentDocument = DV.load(
+initView = function(callback){ 
+  window.currentDocument = DV.load(
    sotw_config,
-   {container: '#document-viewer'}
- );
+{container: '#document-viewer',
+  afterLoad: callback 
+}
+  );
+}
+initView();
+
+$(function(){
+  
+  var volume = getParams("vol");
+  var page = getParams("page");
+  if (volume && page) {
+    
+    volume = (volume.length == 1)? "0"+volume : volume;
+
+    current_volume = "Vol"+volume;
+    reload_sotw_config();
+
+    console.log(window.currentDocument);
+    initView(function() {$.each(DV.viewers,function(k,v){
+      v.api.setCurrentPage(page);
+    });
+    });
+  }
+});
+
+function getParams(key, default_)
+{
+  if (default_==null) default_=""; 
+  key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+  var qs = regex.exec(window.location.href);
+  if(qs == null)
+    return default_;
+  else
+    return qs[1];
+}
+
 </script>
 
 </body>
