@@ -98,7 +98,7 @@ if ($results)
   $p = $doc->id;
 ?>
       <li>
-      	<a href="./Vol<?=$doc->volume ?>/large/SOTW_Vol<?=$doc->volume ?>_<?=$doc->page ?>.gif">Link to a .gif of volume <?=$doc->volume ?>, page <?=$doc->page ?></a>
+        Volume <?= $doc->volume ?>, page <?= $doc->page ?> <a href="/viewer.erb?vol=<?=$doc->volume; ?>&page=<?= $doc->page ?>">view</a> | <a href="./Vol<?=$doc->volume ?>/large/SOTW_Vol<?=$doc->volume ?>_<?=$doc->page ?>.gif">image</a>
         <table style="border: 1px solid black; text-align: left">
          <?php
          foreach ($results->highlighting->$p->text as $snippet)
