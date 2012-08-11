@@ -89,6 +89,8 @@ if ($results)
   $end = min($limit, $total);
 ?>
     <div>Results <?php echo $start; ?> - <?php echo $end;?> of <?php echo $total; ?>:</div>
+    <div>If you click on "view" you will see the page in the document viewer; if you click on "image" you will see a printable gif of the page.</div>
+    
     <ol>
 <?php
   // iterate result documents
